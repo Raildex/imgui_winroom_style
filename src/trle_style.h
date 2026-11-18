@@ -15,6 +15,11 @@ inline constexpr ImVec4 Red    = ImVec4(0.85f, 0.00f, 0.00f, 1.00f); // "SYSTEM 
 // Applies the sharp, grey, 1px-bordered 90s tool look to the current context.
 void ApplyStyle();
 
+// Loads the system font ARIAL.TTF (e.g. C:\Windows\Fonts\ARIAL.TTF) and makes
+// it the default font. Call after ImGui::CreateContext() and before the first
+// frame. Returns nullptr and keeps ImGui's built-in font if Arial is not found.
+ImFont* LoadSystemFont(float sizePixels = 14.0f);
+
 // Draws a raised (or sunken) 1px bevel around the last submitted item.
 void DrawBevel(bool sunken = false);
 

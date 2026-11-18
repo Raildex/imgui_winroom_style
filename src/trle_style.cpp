@@ -1,7 +1,42 @@
 #include "trle_style.h"
 #include "imgui_internal.h" // ImMin
+#include <cstdio>
+#include <cstdlib>
+#include <string>
 
 namespace trle {
+
+static bool FileExists(const std::string& path) {
+    if (FILE* f = std::fopen(path.c_str(), "rb")) {
+        std::fclose(f);
+        return true;
+    }
+    return false;
+}
+
+ImFont* LoadSystemFont(float sizePixels) {
+    std::string candidates[4];
+    int count = 0;
+
+    // Windows: %WINDIR%\Fonts\ARIAL.TTF (falls back to C:\Windows)
+    const char* winDir = std::getenv("WINDIR");
+    if (!winDir) winDir = std::getenv("SystemRoot");
+    candidates[count++] = std::string(winDir ? winDir : "C:\\Windows") + "\\Fonts\\ARIAL.TTF";
+    // Common locations on Linux (msttcorefonts) and macOS
+    candidates[count++] = "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf";
+    candidates[count++] = "/Library/Fonts/Arial.ttf";
+    candidates[count++] = "/System/Library/Fonts/Supplemental/Arial.ttf";
+
+    ImGuiIO& io = ImGui::GetIO();
+    for (int i = 0; i < count; ++i) {
+        if (!FileExists(candidates[i])) continue;
+        if (ImFont* font = io.Fonts->AddFontFromFileTTF(candidates[i].c_str(), sizePixels)) {
+            io.FontDefault = font;
+            return font;
+        }
+    }
+    return nullptr;
+}
 
 void ApplyStyle() {
     ImGuiStyle& style = ImGui::GetStyle();

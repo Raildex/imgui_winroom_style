@@ -109,9 +109,11 @@ int main() {
     io.IniFilename = nullptr; // keep the demo stateless
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
-    // The default ProggyClean bitmap font suits the 90s look well.
-    // For a closer match, load a small Tahoma/MS Sans Serif-like TTF here:
-    // io.Fonts->AddFontFromFileTTF("fonts/tahoma.ttf", 13.0f);
+    // Use the system Arial font (ARIAL.TTF); falls back to ImGui's
+    // built-in ProggyClean font if it can't be found.
+    if (!trle::LoadSystemFont(14.0f)) {
+        std::fprintf(stderr, "ARIAL.TTF not found, using the default ImGui font\n");
+    }
 
     trle::ApplyStyle();
 
