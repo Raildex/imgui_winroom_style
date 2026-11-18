@@ -8,8 +8,8 @@ namespace trle {
 // Signature NGLE accent colours
 inline constexpr ImVec4 Gold   = ImVec4(0.84f, 0.69f, 0.16f, 1.00f); // "Play"
 inline constexpr ImVec4 Cyan   = ImVec4(0.28f, 0.72f, 0.72f, 1.00f); // "New Up" / "New Down"
-inline constexpr ImVec4 Green  = ImVec4(0.22f, 0.72f, 0.22f, 1.00f); // "Backup Project"
-inline constexpr ImVec4 Purple = ImVec4(0.62f, 0.24f, 0.62f, 1.00f); // "Refresh"
+inline constexpr ImVec4 Green  = ImVec4(0.12f, 0.82f, 0.12f, 1.00f); // "Backup Project"
+inline constexpr ImVec4 Purple = ImVec4(0.82f, 0.12f, 0.82f, 1.00f); // "Refresh"
 inline constexpr ImVec4 Red    = ImVec4(0.85f, 0.00f, 0.00f, 1.00f); // "SYSTEM REQUEST" banner
 
 // Applies the sharp, grey, 1px-bordered 90s tool look to the current context.

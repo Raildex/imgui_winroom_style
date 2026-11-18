@@ -25,7 +25,7 @@ void ApplyStyle() {
     // 3. Compact, dense tool layout
     style.WindowPadding     = ImVec2(4.0f, 4.0f);
     style.FramePadding      = ImVec2(4.0f, 2.0f);
-    style.ItemSpacing       = ImVec2(2.0f, 2.0f);
+    style.ItemSpacing       = ImVec2(0.0f, 0.0f);
     style.ItemInnerSpacing  = ImVec2(3.0f, 3.0f);
     style.ScrollbarSize     = 14.0f;
     style.GrabMinSize       = 12.0f;
@@ -37,7 +37,7 @@ void ApplyStyle() {
     const ImVec4 bgHover    = ImVec4(0.67f, 0.67f, 0.67f, 1.00f); // #ABABAB Hover highlight
     const ImVec4 bgActive   = ImVec4(0.42f, 0.42f, 0.42f, 1.00f); // #6B6B6B Pressed state
     const ImVec4 bgInput    = ImVec4(0.68f, 0.68f, 0.68f, 1.00f); // #ADADAD Text/value box
-    const ImVec4 borderDark = ImVec4(0.12f, 0.12f, 0.12f, 1.00f); // #1F1F1F Hard 1px outline
+    const ImVec4 borderDark = ImVec4(0.0f, 0.0f, 0.0f, 1.00f); // #1F1F1F Hard 1px outline
     const ImVec4 textBlack  = ImVec4(0.00f, 0.00f, 0.00f, 1.00f); // #000000 Crisp black text
 
     colors[ImGuiCol_Text]                 = textBlack;
