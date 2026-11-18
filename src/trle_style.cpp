@@ -91,13 +91,15 @@ void DrawBevel(bool sunken) {
     const ImU32 topLeft     = sunken ? dark : light;
     const ImU32 bottomRight = sunken ? light : dark;
 
+    // 1px strips as filled rects so they land exactly on pixel rows/columns
+    // (AddLine on integer coordinates straddles two pixels and looks blurry).
     // Top and left edges
-    draw->AddLine(pMin, ImVec2(pMax.x - 1, pMin.y), topLeft);
-    draw->AddLine(pMin, ImVec2(pMin.x, pMax.y - 1), topLeft);
+    draw->AddRectFilled(pMin, ImVec2(pMax.x, pMin.y + 1), topLeft);
+    draw->AddRectFilled(pMin, ImVec2(pMin.x + 1, pMax.y), topLeft);
 
     // Bottom and right edges
-    draw->AddLine(ImVec2(pMin.x, pMax.y - 1), ImVec2(pMax.x, pMax.y - 1), bottomRight);
-    draw->AddLine(ImVec2(pMax.x - 1, pMin.y), ImVec2(pMax.x - 1, pMax.y), bottomRight);
+    draw->AddRectFilled(ImVec2(pMin.x, pMax.y - 1), pMax, bottomRight);
+    draw->AddRectFilled(ImVec2(pMax.x - 1, pMin.y), pMax, bottomRight);
 }
 
 bool Button(const char* label, const ImVec2& size, const ImVec4* customColor) {
@@ -112,7 +114,11 @@ bool Button(const char* label, const ImVec2& size, const ImVec4* customColor) {
             c.x * 0.80f, c.y * 0.80f, c.z * 0.80f, 1.0f));
     }
 
+    // No frame border (and its light 1px shadow): the bevel is the only edge,
+    // so neighbouring buttons sit flush against each other.
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
     const bool pressed = ImGui::Button(label, size);
+    ImGui::PopStyleVar();
     DrawBevel(ImGui::IsItemActive());
 
     if (customColor) {
